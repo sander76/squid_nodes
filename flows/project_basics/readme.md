@@ -8,3 +8,9 @@ This entry point allows for starting a project, providing global data and defini
 
 
 ![basics](project_basics.png)
+
+## Installation
+
+Copy the contents of the `flows.json` file to the clipboard.
+
+In node red select `top right menu` - `import` - `Clipboard`

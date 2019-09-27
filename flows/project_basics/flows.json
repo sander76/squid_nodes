@@ -11,8 +11,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 470,
-        "y": 160,
+        "x": 450,
+        "y": 80,
         "wires": [
             [
                 "b344a721.d5f898"
@@ -47,12 +47,32 @@
         "type": "squid-data",
         "z": "8d618266.f5b168",
         "name": "A project",
-        "loopcount": "-1",
+        "loopcount": "5",
         "x": 680,
         "y": 220,
         "wires": [
             [
                 "f83419ef.8d737"
+            ]
+        ]
+    },
+    {
+        "id": "551c6c9e.763924",
+        "type": "inject",
+        "z": "8d618266.f5b168",
+        "name": "",
+        "topic": "",
+        "payload": "stop",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 450,
+        "y": 160,
+        "wires": [
+            [
+                "b344a721.d5f898"
             ]
         ]
     }

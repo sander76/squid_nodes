@@ -44,18 +44,22 @@ module.exports = function (RED) {
                 vals.looprunning = true
                 msg.payload = 'running'
             }
+            if (msg.payload === 'stop') {
+                vals.looprunning = false
+            }
 
             if (vals.currentloop === vals.loopcount) {
                 vals.looprunning = false
-                setStatus()
+                // setStatus()
             }
 
             if (vals.looprunning) {
                 vals.currentloop += 1
                 node.log('current loop ' + vals.currentloop + ' of ' + vals.loopcount)
-                setStatus()
+                // setStatus()
                 node.send(msg)
             }
+            setStatus()
         })
     }
     RED.nodes.registerType('squid-data', squidProject)
