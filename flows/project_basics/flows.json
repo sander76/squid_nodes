@@ -1,0 +1,59 @@
+[
+    {
+        "id": "8741bf36.5c08c",
+        "type": "inject",
+        "z": "8d618266.f5b168",
+        "name": "",
+        "topic": "",
+        "payload": "start",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 470,
+        "y": 160,
+        "wires": [
+            [
+                "b344a721.d5f898"
+            ]
+        ]
+    },
+    {
+        "id": "f83419ef.8d737",
+        "type": "delay",
+        "z": "8d618266.f5b168",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 680,
+        "y": 360,
+        "wires": [
+            [
+                "b344a721.d5f898"
+            ]
+        ]
+    },
+    {
+        "id": "b344a721.d5f898",
+        "type": "squid-data",
+        "z": "8d618266.f5b168",
+        "name": "A project",
+        "loopcount": "-1",
+        "x": 680,
+        "y": 220,
+        "wires": [
+            [
+                "f83419ef.8d737"
+            ]
+        ]
+    }
+]
