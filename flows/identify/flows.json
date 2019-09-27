@@ -1,0 +1,73 @@
+[
+    {
+        "id": "a84ec70e.24ebc8",
+        "type": "serial out",
+        "z": "7a6215f7.c1bf24",
+        "name": "",
+        "serial": "41cca8e3.bcf268",
+        "x": 990,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "9d39a7f0.1a4fd8",
+        "type": "serial in",
+        "z": "7a6215f7.c1bf24",
+        "name": "",
+        "serial": "41cca8e3.bcf268",
+        "x": 750,
+        "y": 120,
+        "wires": [
+            [
+                "69e16dcb.1bb974"
+            ]
+        ]
+    },
+    {
+        "id": "f6540fce.0bacd",
+        "type": "inject",
+        "z": "7a6215f7.c1bf24",
+        "name": "Identity",
+        "topic": "",
+        "payload": "{i}",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 770,
+        "y": 240,
+        "wires": [
+            [
+                "a84ec70e.24ebc8"
+            ]
+        ]
+    },
+    {
+        "id": "69e16dcb.1bb974",
+        "type": "squid-type",
+        "z": "7a6215f7.c1bf24",
+        "name": "",
+        "x": 990,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "41cca8e3.bcf268",
+        "type": "serial-port",
+        "z": "",
+        "serialport": "COM4",
+        "serialbaud": "115200",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    }
+]

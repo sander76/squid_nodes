@@ -1,0 +1,518 @@
+[
+    {
+        "id": "315b4993.45236e",
+        "type": "ccu-rpc",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "ccuConfig": "d7cfff3d.5232d8",
+        "iface": "HmIP-RF",
+        "method": "listDevices",
+        "params": "[]",
+        "topic": "${CCU}/${Interface}/${Method}",
+        "x": 550,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "19b1ae98.fc0fd1",
+        "type": "debug",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1250,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "6f999df.c426ee4",
+        "type": "inject",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 300,
+        "y": 800,
+        "wires": [
+            [
+                "315b4993.45236e"
+            ]
+        ]
+    },
+    {
+        "id": "611dd086.a16b6",
+        "type": "ccu-value",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "iface": "HmIP-RF",
+        "channel": "3014049C5400004400940023:1",
+        "datapoint": "LEVEL",
+        "mode": "",
+        "start": true,
+        "change": true,
+        "cache": false,
+        "queue": false,
+        "on": 0,
+        "onType": "undefined",
+        "ramp": 0,
+        "rampType": "undefined",
+        "working": false,
+        "ccuConfig": "d7cfff3d.5232d8",
+        "topic": "${CCU}/${Interface}/${channel}/${datapoint}",
+        "x": 1010,
+        "y": 120,
+        "wires": [
+            [
+                "19b1ae98.fc0fd1"
+            ]
+        ]
+    },
+    {
+        "id": "515427d3.c884c8",
+        "type": "inject",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 610,
+        "y": 100,
+        "wires": [
+            [
+                "611dd086.a16b6"
+            ]
+        ]
+    },
+    {
+        "id": "781aad1.8cda1d4",
+        "type": "inject",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 610,
+        "y": 160,
+        "wires": [
+            [
+                "611dd086.a16b6"
+            ]
+        ]
+    },
+    {
+        "id": "341a77ba.66d4b8",
+        "type": "ccu-value",
+        "z": "2fdeff92.a37d68",
+        "name": "STOP",
+        "iface": "HmIP-RF",
+        "channel": "3014049C5400004400940023:1",
+        "datapoint": "STOP",
+        "mode": "",
+        "start": true,
+        "change": true,
+        "cache": false,
+        "queue": false,
+        "on": 0,
+        "onType": "undefined",
+        "ramp": 0,
+        "rampType": "undefined",
+        "working": false,
+        "ccuConfig": "d7cfff3d.5232d8",
+        "topic": "${CCU}/${Interface}/${channel}/${datapoint}",
+        "x": 550,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a5938c19.6ca19",
+        "type": "inject",
+        "z": "2fdeff92.a37d68",
+        "name": "STOP",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 290,
+        "y": 860,
+        "wires": [
+            [
+                "341a77ba.66d4b8"
+            ]
+        ]
+    },
+    {
+        "id": "393079d8.0db956",
+        "type": "delay",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "25",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 580,
+        "y": 460,
+        "wires": [
+            [
+                "22cf6acd.0f9f9e"
+            ]
+        ]
+    },
+    {
+        "id": "43195279.3e95d4",
+        "type": "change",
+        "z": "2fdeff92.a37d68",
+        "name": "open",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 300,
+        "wires": [
+            [
+                "7ca80a07.7a0eec",
+                "e139cd71.a03a7"
+            ]
+        ]
+    },
+    {
+        "id": "7ca80a07.7a0eec",
+        "type": "delay",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "25",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 580,
+        "y": 300,
+        "wires": [
+            [
+                "e6b78403.4ca5f8"
+            ]
+        ]
+    },
+    {
+        "id": "505b96e3.31913",
+        "type": "inject",
+        "z": "2fdeff92.a37d68",
+        "name": "start",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 60,
+        "wires": [
+            [
+                "b6270637.1d5668"
+            ]
+        ]
+    },
+    {
+        "id": "9ab63f17.92ea3",
+        "type": "function",
+        "z": "2fdeff92.a37d68",
+        "name": "evaluate loopcount",
+        "func": "var count = flow.get(\"loopcount\") || 0\ncount+=1\n\nflow.set(\"loopcount\",count)\n\nmsg.payload={\"loopcount\": count}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 610,
+        "y": 560,
+        "wires": [
+            [
+                "a0042d45.487958"
+            ]
+        ]
+    },
+    {
+        "id": "a0042d45.487958",
+        "type": "debug",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 870,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "a6e843c3.6d4d5",
+        "type": "switch",
+        "z": "2fdeff92.a37d68",
+        "name": "continue?",
+        "property": "loopcount",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "3",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 180,
+        "y": 300,
+        "wires": [
+            [
+                "43195279.3e95d4"
+            ]
+        ]
+    },
+    {
+        "id": "9095f0fd.094838",
+        "type": "change",
+        "z": "2fdeff92.a37d68",
+        "name": "close",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 460,
+        "wires": [
+            [
+                "9ab63f17.92ea3",
+                "393079d8.0db956",
+                "91d70198.8df9"
+            ]
+        ]
+    },
+    {
+        "id": "f7100ba8.51e6b",
+        "type": "link out",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "links": [
+            "7c9ea1a9.39d95"
+        ],
+        "x": 975,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "7c9ea1a9.39d95",
+        "type": "link in",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "links": [
+            "f7100ba8.51e6b"
+        ],
+        "x": 75,
+        "y": 300,
+        "wires": [
+            [
+                "a6e843c3.6d4d5"
+            ]
+        ]
+    },
+    {
+        "id": "b6270637.1d5668",
+        "type": "function",
+        "z": "2fdeff92.a37d68",
+        "name": "project data",
+        "func": "flow.set(\"loopcount\",0)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330,
+        "y": 60,
+        "wires": [
+            [
+                "43195279.3e95d4"
+            ]
+        ]
+    },
+    {
+        "id": "22cf6acd.0f9f9e",
+        "type": "switch",
+        "z": "2fdeff92.a37d68",
+        "name": "ledgate evaluate",
+        "property": "payload",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 790,
+        "y": 460,
+        "wires": [
+            [
+                "f7100ba8.51e6b"
+            ]
+        ]
+    },
+    {
+        "id": "e6b78403.4ca5f8",
+        "type": "switch",
+        "z": "2fdeff92.a37d68",
+        "name": "ledgate evaluate",
+        "property": "payload",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 790,
+        "y": 300,
+        "wires": [
+            [
+                "9095f0fd.094838"
+            ]
+        ]
+    },
+    {
+        "id": "ef432b57.b0e828",
+        "type": "file",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1170,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f7b7a790.3f5c28",
+        "type": "link in",
+        "z": "2fdeff92.a37d68",
+        "name": "Device",
+        "links": [
+            "e139cd71.a03a7",
+            "91d70198.8df9"
+        ],
+        "x": 780,
+        "y": 220,
+        "wires": [
+            [
+                "611dd086.a16b6"
+            ]
+        ]
+    },
+    {
+        "id": "e139cd71.a03a7",
+        "type": "link out",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "links": [
+            "f7b7a790.3f5c28"
+        ],
+        "x": 455,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "91d70198.8df9",
+        "type": "link out",
+        "z": "2fdeff92.a37d68",
+        "name": "",
+        "links": [
+            "f7b7a790.3f5c28"
+        ],
+        "x": 455,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "d7cfff3d.5232d8",
+        "type": "ccu-connection",
+        "z": "",
+        "name": "rpidongle",
+        "host": "192.168.1.135",
+        "regaEnabled": false,
+        "bcrfEnabled": false,
+        "iprfEnabled": true,
+        "virtEnabled": false,
+        "bcwiEnabled": false,
+        "cuxdEnabled": false,
+        "regaPoll": true,
+        "regaInterval": "30",
+        "rpcPingTimeout": "60",
+        "rpcInitAddress": "",
+        "rpcServerHost": "192.168.1.131",
+        "rpcBinPort": "2065",
+        "rpcXmlPort": "2066",
+        "queueTimeout": "5000",
+        "queuePause": "250",
+        "contextStore": ""
+    }
+]

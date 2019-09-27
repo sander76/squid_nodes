@@ -1,0 +1,12 @@
+{
+  "name": "node-red-contrib-squid-led-gate",
+  "version": "1.0.4",
+  "description": "parse incoming ledgate data",
+  "author": "",
+  "license": "BSD",
+  "node-red": {
+    "nodes": {
+      "led_gate": "led-gate.js"
+    }
+  }
+}

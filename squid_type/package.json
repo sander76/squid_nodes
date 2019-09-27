@@ -1,0 +1,12 @@
+{
+  "name": "node-red-contrib-squid-type",
+  "version": "1.0.4",
+  "description": "listen for incoming squid type data",
+  "author": "",
+  "license": "BSD",
+  "node-red": {
+    "nodes": {
+      "led_gate": "type.js"
+    }
+  }
+}

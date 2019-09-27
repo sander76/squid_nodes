@@ -1,0 +1,12 @@
+{
+    "name": "node-red-contrib-squid-relais",
+    "version": "1.0.0",
+    "description": "switch a squid relais.",
+    "author": "",
+    "license": "BSD",
+    "node-red": {
+        "nodes": {
+            "relais": "relais.js"
+        }
+    }
+}

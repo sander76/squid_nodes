@@ -1,0 +1,35 @@
+<script type="text/javascript">
+    RED.nodes.registerType('led-gate', {
+        category: 'squid',
+        defaults: {
+            prefix: {
+                value: ''
+            },
+            name: {
+                value: ''
+            }
+        },
+        inputs: 1,
+        outputs: 4,
+        icon: 'arrow-in.png',
+        label: 'led-gate',
+        outputLabels: ['port 4', 'port 5', 'port 6', 'port 7']
+    })
+
+</script>
+
+<script type="text/x-red" data-template-name="led-gate">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+            <label for="node-input-prefix"><i class="fa fa-tag"></i> Prefix</label>
+            <input type="text" id="node-input-prefix" placeholder="Prefix">
+        </div>
+    <div class="form-tips"><b>Tip:</b> This is here to help.</div>
+</script>
+
+<script type="text/x-red" data-help-name="led-gate">
+    <p>Parse incoming squid ledgate data. Store it in a global context.</p>
+</script>
