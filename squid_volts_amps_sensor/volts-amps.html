@@ -25,6 +25,7 @@
         <label for="node-input-deltaV"><i class="fa fa-tag"></i> deltaV</label>
         <input type="text" id="node-input-deltaV" placeholder="deltaV">
     </div>
+        <div>Define a delta A(mps) to filter out duplicates</div>
     <div class="form-row">
         <label for="node-input-deltaA"><i class="fa fa-tag"></i> deltaA</label>
         <input type="text" id="node-input-deltaA" placeholder="deltaA">
@@ -34,9 +35,9 @@
         <input type="text" id="node-input-bufferLength" placeholder="bufferLength">
     </div>
     
-    <div class="form-tips"><b>Tip:</b> This is here to help.</div>
 </script>
 
 <script type="text/x-red" data-help-name="volts-amps">
     <p>Collect incoming Volts and Amps sensor data.</p>
+    <p>Outputs and array of measurements which are unique based on delta V and A values</p>
 </script>
