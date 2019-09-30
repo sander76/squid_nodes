@@ -3,7 +3,7 @@ Description=hmip-dongle
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/squid_nodes/node-red-rpi-hmip/hmip-rf-usb.sh
+ExecStart=/home/pi/squid_nodes/node-red-rpi-hmip/hmip-rf-usb.sh
 User=root
 
 [Install]
