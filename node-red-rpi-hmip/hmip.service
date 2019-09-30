@@ -1,0 +1,11 @@
+[Unit]
+Description=HmipServer
+After=dongle_driver.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/hmip
+ExecStart=java -jar /home/pi/hmip/hmip-server.jar /home/pi/hmip/crRFD.conf
+
+[Install]
+WantedBy=multi-user.target
