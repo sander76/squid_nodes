@@ -1,0 +1,225 @@
+[
+    {
+        "id": "6e6d28e.c407658",
+        "type": "ccu-rpc",
+        "z": "7c51b4f0.29a274",
+        "name": "",
+        "ccuConfig": "500fa041.1f94f8",
+        "iface": "HmIP-RF",
+        "method": "listDevices",
+        "params": "[]",
+        "topic": "${CCU}/${Interface}/${Method}",
+        "x": 930,
+        "y": 500,
+        "wires": [
+            [
+                "dfa72cfd.5b776"
+            ]
+        ]
+    },
+    {
+        "id": "95a7be57.54bc38",
+        "type": "debug",
+        "z": "7c51b4f0.29a274",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1270,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "5907f6b0.fed66",
+        "type": "inject",
+        "z": "7c51b4f0.29a274",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 600,
+        "y": 500,
+        "wires": [
+            [
+                "6e6d28e.c407658"
+            ]
+        ]
+    },
+    {
+        "id": "27922149.d1d75e",
+        "type": "ccu-value",
+        "z": "7c51b4f0.29a274",
+        "name": "",
+        "iface": "HmIP-RF",
+        "channel": "30142E1B4C00004400C4000C:1",
+        "datapoint": "LEVEL",
+        "mode": "",
+        "start": true,
+        "change": true,
+        "cache": false,
+        "queue": false,
+        "on": 0,
+        "onType": "undefined",
+        "ramp": 0,
+        "rampType": "undefined",
+        "working": false,
+        "ccuConfig": "500fa041.1f94f8",
+        "topic": "${CCU}/${Interface}/${channel}/${datapoint}",
+        "x": 990,
+        "y": 220,
+        "wires": [
+            [
+                "95a7be57.54bc38"
+            ]
+        ]
+    },
+    {
+        "id": "44522f20.060168",
+        "type": "inject",
+        "z": "7c51b4f0.29a274",
+        "name": "",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 590,
+        "y": 200,
+        "wires": [
+            [
+                "27922149.d1d75e"
+            ]
+        ]
+    },
+    {
+        "id": "23d4ef0.5e6a312",
+        "type": "inject",
+        "z": "7c51b4f0.29a274",
+        "name": "",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 590,
+        "y": 260,
+        "wires": [
+            [
+                "27922149.d1d75e"
+            ]
+        ]
+    },
+    {
+        "id": "319fcd63.0620a2",
+        "type": "ccu-value",
+        "z": "7c51b4f0.29a274",
+        "name": "STOP",
+        "iface": "HmIP-RF",
+        "channel": "30142E1B4C00004400C4000C:1",
+        "datapoint": "STOP",
+        "mode": "",
+        "start": true,
+        "change": true,
+        "cache": false,
+        "queue": false,
+        "on": 0,
+        "onType": "undefined",
+        "ramp": 0,
+        "rampType": "undefined",
+        "working": false,
+        "ccuConfig": "500fa041.1f94f8",
+        "topic": "${CCU}/${Interface}/${channel}/${datapoint}",
+        "x": 910,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b5f67548.a8ab7",
+        "type": "inject",
+        "z": "7c51b4f0.29a274",
+        "name": "STOP",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 590,
+        "y": 600,
+        "wires": [
+            [
+                "319fcd63.0620a2"
+            ]
+        ]
+    },
+    {
+        "id": "dea014b.4ca4c68",
+        "type": "inject",
+        "z": "7c51b4f0.29a274",
+        "name": "",
+        "topic": "",
+        "payload": "0.5",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 590,
+        "y": 320,
+        "wires": [
+            [
+                "27922149.d1d75e"
+            ]
+        ]
+    },
+    {
+        "id": "dfa72cfd.5b776",
+        "type": "debug",
+        "z": "7c51b4f0.29a274",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1270,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "500fa041.1f94f8",
+        "type": "ccu-connection",
+        "z": "",
+        "name": "192.168.1.30",
+        "host": "192.168.1.30",
+        "regaEnabled": false,
+        "bcrfEnabled": false,
+        "iprfEnabled": true,
+        "virtEnabled": false,
+        "bcwiEnabled": false,
+        "cuxdEnabled": false,
+        "regaPoll": true,
+        "regaInterval": "30",
+        "rpcPingTimeout": "60",
+        "rpcInitAddress": "",
+        "rpcServerHost": "192.168.1.12",
+        "rpcBinPort": "2065",
+        "rpcXmlPort": "2066",
+        "queueTimeout": "5000",
+        "queuePause": "250",
+        "contextStore": ""
+    }
+]
