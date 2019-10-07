@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "A squid project.",
     "author": "",
-    "license": "BSD",
+    "license": "MIT",
     "node-red": {
         "nodes": {
             "data": "data.js"
