@@ -1,9 +1,12 @@
 {
   "name": "node-red-contrib-squid-led-gate",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "parse incoming ledgate data",
   "author": "",
   "license": "MIT",
+  "keywords": [
+    "node-red"
+  ],
   "node-red": {
     "nodes": {
       "led_gate": "led-gate.js"

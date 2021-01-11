@@ -1,9 +1,12 @@
 {
     "name": "node-red-contrib-squid-data",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "A squid project.",
     "author": "",
     "license": "MIT",
+    "keywords": [
+        "node-red"
+    ],
     "node-red": {
         "nodes": {
             "data": "data.js"

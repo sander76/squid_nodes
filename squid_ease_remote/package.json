@@ -1,0 +1,15 @@
+{
+  "name": "node-red-contrib-squid-ease-remote",
+  "version": "0.0.3",
+  "description": "send out hmip remote commands.",
+  "author": "",
+  "license": "MIT",
+  "keywords": [
+    "node-red"
+  ],
+  "node-red": {
+    "nodes": {
+      "led_gate": "remote.js"
+    }
+  }
+}

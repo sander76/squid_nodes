@@ -1,0 +1,30 @@
+<script type="text/javascript">
+    RED.nodes.registerType('remote button press',
+        {
+            category: 'squid',
+            defaults: {
+                name: { value: 'button' },
+                button: { value: 1 }
+            },
+            inputs: 1,
+            outputs: 1,
+            icon: 'arrow-out.png',
+            label: function () {
+                return this.name + " " + this.button
+            }
+        }
+    )
+
+</script>
+
+<script type="text/x-red" data-template-name='remote button press'>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-button"><i class="fa fa-tag"></i> Button nr</label>
+        <input type="number" id="node-input-button" placeholder="Button">
+    </div>
+    <div class="form-tips"><b>Tip:</b> Select a button nr as defined in the HmIP app</div>
+</script>

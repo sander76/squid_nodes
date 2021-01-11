@@ -1,9 +1,12 @@
 {
     "name": "node-red-contrib-squid-volts-amps",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Collect and parse incoming Volts and Amps sensor data",
     "author": "",
     "license": "MIT",
+    "keywords": [
+        "node-red"
+    ],
     "node-red": {
         "nodes": {
             "volts-amps": "volts-amps.js"
