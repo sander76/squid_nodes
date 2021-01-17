@@ -1,0 +1,49 @@
+<script type="text/javascript">
+    RED.nodes.registerType('squid-data', {
+        category: 'squid',
+        defaults: {
+            name: {
+                value: 'A project'
+            },
+            loopcount: {
+                value: 5
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'arrow-in.png',
+        label: function () {
+            return this.name || "project data"
+        }
+    })
+
+</script>
+
+<script type="text/x-red" data-template-name="squid-data">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <p>To create an infinite loop set the loopcount to <b>-1</b></p>
+        <label for="node-input-loopcount"><i class="fa fa-tag"></i> Loopcount</label>
+        <input type="text" id="node-input-loopcount" placeholder="Loopcount">
+    </div>
+
+
+</script>
+
+<script type="text/x-red" data-help-name="squid-data">
+    <p>
+        <b>name :</b> Stored in global as name
+    </p>
+    <p>
+        <b>loopcount :</b> Stored in global as loopcount
+    </p>
+    <p>
+        A <pre>currentloop</pre> is stored in global keeping track of which loop the flow is curerntly in.
+    </p>
+    <p>
+        A <pre>looprunning</pre> boolean is stored for checking whether the loop is running
+        </p>
+</script>

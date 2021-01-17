@@ -1,0 +1,15 @@
+{
+  "name": "node-red-contrib-squid-notify",
+  "version": "0.0.1",
+  "description": "Send data to an ms teams webhook",
+  "author": "",
+  "license": "MIT",
+  "keywords": [
+    "node-red"
+  ],
+  "node-red": {
+    "nodes": {
+      "led_gate": "remote.js"
+    }
+  }
+}
