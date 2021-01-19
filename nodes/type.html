@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    RED.nodes.registerType('squid-type', {
+        category: 'squid',
+        defaults: {
+            name: {
+                value: ''
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'arrow-in.png',
+        label: 'type'
+    })
+
+</script>
+
+<script type="text/x-red" data-template-name="squid-type">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="squid-type">
+    <p>Listing for incoming squid info. Will be printed to the debug console or forwarded as message payload.
+    </p>
+</script>

@@ -12,7 +12,10 @@
         "nodes": {
             "squid-remote": "nodes/remote.js",
             "data": "nodes/data.js",
-            "led-gate": "nodes/led-gate.js"
+            "led-gate": "nodes/led-gate.js",
+            "relais": "nodes/relais.js",
+            "squid-type": "nodes/type.js",
+            "volts-amps-sensor": "nodes/volts-amps.js"
         }
     },
     "devDependencies": {

@@ -12,17 +12,20 @@ module.exports = function (RED) {
             }
             return project
         }
-
-        var currentProject = getCurrentProject()
-
-
         var status = [
-            { 'port': '4', 'name': '4', 'val': '?' },
-            { 'port': '5', 'name': '5', 'val': '?' },
-            { 'port': '6', 'name': '6', 'val': '?' },
-            { 'port': '7', 'name': '7', 'val': '?' }
+            { 'port': 4, 'name': '4', 'val': '?' },
+            { 'port': 5, 'name': '5', 'val': '?' },
+            { 'port': 6, 'name': '6', 'val': '?' },
+            { 'port': 7, 'name': '7', 'val': '?' }
         ]
-        currentProject.ledGates = status
+
+        var populateProject = function () {
+            currentProject.ledGates = status;
+        }
+
+        var currentProject = getCurrentProject();
+        populateProject();
+
 
         var setNodeStatus = function () {
             var str = ''
@@ -44,6 +47,7 @@ module.exports = function (RED) {
             node.send(payload)
         }
         var getPortData = function (port) {
+            port = parseInt(port);
             var prt
             node.log('searching for port ' + port)
             status.forEach(function (item) {
@@ -55,27 +59,35 @@ module.exports = function (RED) {
 
             return prt
         }
-        node.on('input', function (msg) {
-            var data = msg.payload.slice(1, -2).split(':')
-            // this.log(data)
 
+        var regex = /\{(.*)\}/;
+
+        setNodeStatus();
+
+        node.on('input', function (msg) {
+
+            var found = msg.payload.match(regex);
+
+            if (!found) {
+                console.log("not found")
+                return
+            }
+
+            // use the first matching group
+            var data = found[1].split(':')
+            // this.log(data)
+            // console.log(data);
             if (data[0] === 's') {
                 var port = getPortData(data[1])
                 port.name = config.prefix + port.port
-                if (data[2] === '0') {
-                    port.val = false
-                } else {
+                if (data[2] == '1') {
                     port.val = true
+                } else if (data[2] == '0') {
+                    port.val = false
                 }
 
                 sendPayload(port)
                 setNodeStatus()
-
-
-                globalContext.set(port.name, port.val)
-
-
-                // currentProject.ledGates = status
             }
         })
     }
@@ -89,7 +101,7 @@ module.exports = function (RED) {
         var getCurrentProject = function () {
             var project = (node.context().global).get("currentProject")
             if (project === undefined) {
-                var project = {};
+                project = {};
                 (node.context().global).set("currentProject", project)
             }
             return project
@@ -112,10 +124,20 @@ module.exports = function (RED) {
         }
 
         node.on('input', function (msg) {
-            var prt = getPortData(config.port.toString(), currentProject.ledGates)
-            node.error("found port" + prt)
-            msg.payload = prt
-            node.send([null, msg])
+            var prt = getPortData(config.port, currentProject.ledGates);
+
+            if (prt.val === "?") {
+                // Send a message to the unknown port.
+                node.send([null, null, msg]);
+            }
+            else if (prt.val === true) {
+                // Send a message to the true port.
+                node.send([msg, null, null]);
+            }
+            else {
+                node.send([null, msg, null]);
+            }
+
 
         })
     }

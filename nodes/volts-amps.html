@@ -1,0 +1,43 @@
+<script type="text/javascript">
+    RED.nodes.registerType('volts-amps', {
+        category: 'squid',
+        defaults: {
+            deltaV: {
+                value: 0.1
+            },
+            deltaA: {
+                value: 0.5
+            },
+            bufferLength: {
+                value: 10
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'arrow-out.png',
+        label: 'volt amps sensor'
+    })
+
+</script>
+
+<script type="text/x-red" data-template-name="volts-amps">
+    <div class="form-row">
+        <label for="node-input-deltaV"><i class="fa fa-tag"></i> deltaV</label>
+        <input type="text" id="node-input-deltaV" placeholder="deltaV">
+    </div>
+        <div>Define a delta A(mps) to filter out duplicates</div>
+    <div class="form-row">
+        <label for="node-input-deltaA"><i class="fa fa-tag"></i> deltaA</label>
+        <input type="text" id="node-input-deltaA" placeholder="deltaA">
+    </div>
+    <div class="form-row">
+        <label for="node-input-bufferLength"><i class="fa fa-tag"></i> bufferLength</label>
+        <input type="text" id="node-input-bufferLength" placeholder="bufferLength">
+    </div>
+    
+</script>
+
+<script type="text/x-red" data-help-name="volts-amps">
+    <p>Collect incoming Volts and Amps sensor data.</p>
+    <p>Outputs and array of measurements which are unique based on delta V and A values</p>
+</script>
