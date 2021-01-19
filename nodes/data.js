@@ -1,84 +1,72 @@
 module.exports = function (RED) {
     function squidProject(config) {
         RED.nodes.createNode(this, config)
-        var node = this
-        var glob = node.context().global
+        var node = this;
+        // var glob = node.context().global;
 
         var getCurrentProject = function () {
-            var project = (node.context().global).get("currentProject")
+            var project = node.context().global.get("currentProject")
             if (project === undefined) {
-                project = {}
-                    (node.context().global).set("currentProject", project)
+                project = {};
+                node.context().global.set("currentProject", project);
             }
-            return project
+            return project;
         }
 
-        var currentProject = getCurrentProject()
 
-        var vals = {
+        var populateProject = function () {
+            currentProject.loop = {}
+            currentProject.loop.loopCount = config.loopcount;
+            currentProject.loop.currentLoop = 0;
+            currentProject.loop.isRunning = false;
+        };
+        var currentProject = getCurrentProject();
+        populateProject();
 
-            get currentloop() { return currentProject.currentloop },
-            set currentloop(val) { currentProject.currentloop = val },
-
-            get loopcount() { return glob.get('loopcount') },
-
-            get looprunning() { return glob.get('looprunning') || false },
-            set looprunning(val) { glob.set('looprunning', val) }
-        }
-
-        glob.set('loopcount', parseInt(config.loopcount))
-
-        vals.looprunning = false
 
         var reset = function () {
             // reset global data.
-            node.log('resetting')
-            node.context().global.set("currentProject", {})
-            currentProject = getCurrentProject()
-
-            return currentProject
+            populateProject();
         }
 
-        var currentProject = reset()
-
         var setStatus = function () {
-            var color = vals.looprunning ? 'green' : 'red'
-            var running = vals.looprunning ? 'running' : 'not running'
-            var lop = 'loop ' + vals.currentloop
+            var color = currentProject.loop.isRunning ? 'green' : 'red'
+            var running = currentProject.loop.isRunning ? 'running' : 'not running'
+            var lop = 'loop ' + currentProject.loop.currentLoop;
 
-            if (vals.loopcount > 0) {
-                lop = 'loop ' + vals.currentloop + ' of ' + vals.loopcount
+            if (currentProject.loop.loopCount > 0) {
+                lop = 'loop ' + currentProject.loop.currentLoop + ' of ' + currentProject.loop.loopCount;
             }
 
-            var txt = lop + ' ' + running
-            node.status({ fill: color, text: txt })
+            var txt = lop + ' ' + running;
+            node.status({ fill: color, text: txt });
         }
 
         node.on('input', function (msg) {
             if (msg.payload === 'start') {
-                reset()
-                vals.looprunning = true
-                msg.payload = 'running'
+                reset();
+                currentProject.loop.isRunning = true;
+                msg.payload = 'running';
             }
             if (msg.payload === 'stop') {
-                vals.looprunning = false
+                currentProject.loop.isRunning = false
             }
 
-            if (vals.currentloop === vals.loopcount) {
-                vals.looprunning = false
+            if (currentProject.loop.currentLoop === currentProject.loop.loopCount) {
+                currentProject.loop.isRunning = false
                 // setStatus()
             }
 
-            if (vals.looprunning) {
-                vals.currentloop += 1
+            if (currentProject.loop.isRunning) {
+                currentProject.loop.currentLoop += 1;
 
 
-                node.log('current loop ' + vals.currentloop + ' of ' + vals.loopcount)
+                node.log('current loop ' + currentProject.loop.currentLoop + ' of ' + currentProject.loop.loopCount);
                 // setStatus()
-                node.send(msg)
+                node.send(msg);
             }
-            setStatus()
+            setStatus();
         })
     }
-    RED.nodes.registerType('squid-data', squidProject)
+    RED.nodes.registerType('squid-data', squidProject);
 }
