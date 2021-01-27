@@ -16,6 +16,7 @@ module.exports = function (RED) {
 
         var populateProject = function () {
             currentProject.loop = {}
+            currentProject.loop.name = config.name;
             currentProject.loop.loopCount = config.loopcount;
             currentProject.loop.currentLoop = 0;
             currentProject.loop.isRunning = false;
@@ -43,28 +44,40 @@ module.exports = function (RED) {
         }
 
         node.on('input', function (msg) {
+            //console.log("input");
+            var start = null;
+            var stop = null;
+            var running = null;
+
             if (msg.payload === 'start') {
                 reset();
                 currentProject.loop.isRunning = true;
                 msg.payload = 'running';
+                start = "started";
+                running = "running";
             }
             if (msg.payload === 'stop') {
-                currentProject.loop.isRunning = false
+                currentProject.loop.isRunning = false;
+                stop = "stopped";
             }
 
             if (currentProject.loop.currentLoop === currentProject.loop.loopCount) {
-                currentProject.loop.isRunning = false
+                currentProject.loop.isRunning = false;
+                stop = "finished";
                 // setStatus()
             }
 
             if (currentProject.loop.isRunning) {
                 currentProject.loop.currentLoop += 1;
 
-
+                running = msg;
                 node.log('current loop ' + currentProject.loop.currentLoop + ' of ' + currentProject.loop.loopCount);
                 // setStatus()
-                node.send(msg);
+
             }
+            var output = [start, stop, running];
+            // console.log(output);
+            node.send(output);
             setStatus();
         })
     }

@@ -1,0 +1,38 @@
+<script type="text/javascript">
+    RED.nodes.registerType('notification',
+        {
+            category: 'squid', defaults: {
+                name: { value: 'notification' },
+                text: { value: 'the message text' },
+                addTestData: { value: true }
+            },
+            inputs: 1,
+            outputs: 1,
+            icon: 'arrow-in.png',
+            label: function () {
+                return this.name || "notify"
+            }
+        })
+</script>
+<script type="text/x-red" data-template-name="notification">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">    
+    </div>
+    <div class="form-row">
+        <label for="node-input-text"><i class="fa fa-tag"></i> Message text</label>
+        <input type="text" id="node-input-text" placeholder=" Message text">    
+    </div>
+    <div class="form-tips">Enter the main info of the notification.</div>
+    <div class="form-row">
+        <label for="node-input-addTestData"><i class="fa fa-tag"></i> Add test data</label>
+        <input type="checkbox" id="node-input-addTestData" placeholder=" Include test data">    
+    </div>
+    <div class="form-tips">If true, the global test data will be included (recommended)</div>
+</script>
+
+<script type="text/html" data-help-name="notification">
+    <p>Output a MS Teams message that can be sent to a webhook for posting information in a Teams channel.
+    </p>
+    <p>Use this in combination with the <b>http request</b> node</p>
+</script>

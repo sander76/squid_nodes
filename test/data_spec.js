@@ -123,8 +123,10 @@ describe('squid-data Node', function () {
     })
 
     it('should loop exactly 10 times', function (done) {
-        var flow = [{ id: "n1", type: "squid-data", name: "squid data", loopcount: 10, wires: [["n2"]] },
-        { id: "n2", type: "helper" }];
+        var flow = [{ id: "n1", type: "squid-data", name: "squid data", loopcount: 10, wires: [["start_node", "stop_node", "n2"]] },
+        { id: "n2", type: "helper" }, {
+            id: "start_node", type: "helper"
+        }, { id: "stop_node", type: "helper" }];
 
         helper.load(squidData, flow, function () {
             var n1 = helper.getNode("n1");
@@ -134,12 +136,22 @@ describe('squid-data Node', function () {
             var currentProject = (n1.context().global).get("currentProject");
 
             n2.on("input", function (msg) {
-                loopCounter += 1;
-                if (loopCounter === 10) {
-                    if (!currentProject.loop.isRunning) {
-                        done();
+                try {
+
+                    if (msg !== null) {
+                        loopCounter += 1;
+                    }
+                    console.log(loopCounter)
+                    if (loopCounter === 10) {
+                        if (!currentProject.loop.isRunning) {
+                            done();
+                        }
                     }
                 }
+                catch (err) {
+                    done(err)
+                }
+
             })
             // a start input, starts the loop and runs it.
             n1.receive({ payload: "start" });
