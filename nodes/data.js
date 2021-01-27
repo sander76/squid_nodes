@@ -53,18 +53,18 @@ module.exports = function (RED) {
                 reset();
                 currentProject.loop.isRunning = true;
                 msg.payload = 'running';
-                start = "started";
-                running = "running";
+                start = { payload: "started" };
+                running = msg;
             }
             if (msg.payload === 'stop') {
                 currentProject.loop.isRunning = false;
-                stop = "stopped";
+                stop = { payload: "stopped" };
             }
 
             if (currentProject.loop.currentLoop === currentProject.loop.loopCount) {
                 currentProject.loop.isRunning = false;
-                stop = "finished";
-                // setStatus()
+                stop = { payload: "finished" };
+
             }
 
             if (currentProject.loop.isRunning) {
@@ -72,7 +72,6 @@ module.exports = function (RED) {
 
                 running = msg;
                 node.log('current loop ' + currentProject.loop.currentLoop + ' of ' + currentProject.loop.loopCount);
-                // setStatus()
 
             }
             var output = [start, stop, running];

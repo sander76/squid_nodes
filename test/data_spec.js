@@ -123,7 +123,7 @@ describe('squid-data Node', function () {
     })
 
     it('should loop exactly 10 times', function (done) {
-        var flow = [{ id: "n1", type: "squid-data", name: "squid data", loopcount: 10, wires: [["start_node", "stop_node", "n2"]] },
+        var flow = [{ id: "n1", type: "squid-data", name: "squid data", loopcount: 10, wires: [["start_node"], ["stop_node"], ["n2"]] },
         { id: "n2", type: "helper" }, {
             id: "start_node", type: "helper"
         }, { id: "stop_node", type: "helper" }];
@@ -141,7 +141,7 @@ describe('squid-data Node', function () {
                     if (msg !== null) {
                         loopCounter += 1;
                     }
-                    console.log(loopCounter)
+
                     if (loopCounter === 10) {
                         if (!currentProject.loop.isRunning) {
                             done();
