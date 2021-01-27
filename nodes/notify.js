@@ -23,7 +23,13 @@ module.exports = function (RED) {
 
 
             if (config.addTestData) {
-                message.sections = [{ "text": JSON.stringify(currentProject) }];
+                var sections = [];
+                sections.push({
+                    "facts": [{ name: "Test name", value: currentProject.loop.name }]
+                });
+
+                sections.push({ "text": JSON.stringify(currentProject) });
+                message.sections = sections;
             }
 
             msg.payload = message;
