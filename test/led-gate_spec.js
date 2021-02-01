@@ -85,11 +85,32 @@ describe('ledgate Node', function () {
                     done();
                 }
                 catch (err) { done(err); }
-
-
-
             })
         } catch (err) { done(err); }
+    })
+
+    it('should emit only on ledgate=true', function (done) {
+        /// To finish: this should assert that a certain output is NOT called.
+        var flow = [
+            { id: "ledstate", type: 'led-gate-status', name: 'a name', port: 1, wires: [['true_output']] },
+            { id: 'true_output', type: 'helper' }
+        ]
+
+        helper.load(ledGate, flow, function () {
+            var ledStateNode = helper.getNode("ledstate");
+            ledStateNode.context().global.get('currentProject').ledGates = [{ 'port': 1, 'name': 'name', 'val': true }];
+
+            var outp = helper.getNode('true_output');
+
+            // console.log(ledStateNode);
+
+            outp.on('input', function (msg) {
+                // console.log(msg);
+                done();
+            })
+
+            ledStateNode.receive({ payload: "irrelevant payload." });
+        })
     })
 
 })
