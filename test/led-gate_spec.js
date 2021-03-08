@@ -89,28 +89,27 @@ describe('ledgate Node', function () {
         } catch (err) { done(err); }
     })
 
-    it('should emit only on ledgate=true', function (done) {
-        /// To finish: this should assert that a certain output is NOT called.
+    it('should get port 5', function (done) {
         var flow = [
-            { id: "ledstate", type: 'led-gate-status', name: 'a name', port: 1, wires: [['true_output']] },
-            { id: 'true_output', type: 'helper' }
+            { id: "ledstate", type: 'led-gate-status', name: 'a name' },
+            { id: "ledgate", type: "led-gate" },
+            { id: 'true_output', type: 'helper' }, { id: 'false_output', type: 'helper' }
         ]
-
         helper.load(ledGate, flow, function () {
-            var ledStateNode = helper.getNode("ledstate");
-            ledStateNode.context().global.get('currentProject').ledGates = [{ 'port': 1, 'name': 'name', 'val': true }];
+            var ledGate = helper.getNode('ledgate')
+            var ledStateNode = helper.getNode('ledstate')
 
-            var outp = helper.getNode('true_output');
+            var availablePorts = ledStateNode.context().global.get('currentProject').ledGates;
 
-            // console.log(ledStateNode);
-
-            outp.on('input', function (msg) {
-                // console.log(msg);
-                done();
-            })
-
-            ledStateNode.receive({ payload: "irrelevant payload." });
+            try {
+                var prt = ledStateNode.getPortData(5, availablePorts);
+            }
+            catch (err) {
+                console.log(err);
+            }
+            console.log(prt);
+            assert.equal(prt.port, 5);
+            done();
         })
     })
-
 })

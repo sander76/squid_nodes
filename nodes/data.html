@@ -7,7 +7,10 @@
             },
             loopcount: {
                 value: 5
-            }
+            },
+            productId: { value: "unknown" },
+            remarks: { value: "" }
+
         },
         inputs: 1,
         outputs: 3,
@@ -22,17 +25,25 @@
 
 <script type="text/x-red" data-template-name="squid-data">
     <div class="form-row">
-        <p>Choose a name that properly identifies the current test</p>
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
+        <p>Choose a name that properly identifies the current test</p>
     </div>
     <div class="form-row">
-        <p>To create an infinite loop set the loopcount to <b>-1</b></p>
         <label for="node-input-loopcount"><i class="fa fa-tag"></i> Loopcount</label>
         <input type="text" id="node-input-loopcount" placeholder="Loopcount">
+        <p>To create an infinite loop set the loopcount to <b>-1</b></p>
     </div>
-
-
+    <div class="form-row">
+        <label for="node-input-productId"><i class="fa fa-tag"></i>Product ID</label>
+        <input type="text" id="node-input-productId" placeholder="product identifier">
+        <p>System specific product identifier.</p>
+    </div>
+    <div class="form-row">
+        <label for="node-input-remarks"><i class="fa fa-tag"></i>Remarks</label>
+        <textarea id="node-input-remarks" rows="3"></textarea>
+        <p>Test specific remarks..</p>
+    </div>
 </script>
 
 <script type="text/x-red" data-help-name="squid-data">

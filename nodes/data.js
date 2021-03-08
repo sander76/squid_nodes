@@ -15,11 +15,15 @@ module.exports = function (RED) {
 
 
         var populateProject = function () {
+            currentProject.name = config.name;
+            currentProject.isRunning = false;
+            currentProject.productId = config.productId
+            currentProject.remarks = config.remarks
             currentProject.loop = {}
-            currentProject.loop.name = config.name;
             currentProject.loop.loopCount = config.loopcount;
             currentProject.loop.currentLoop = 0;
-            currentProject.loop.isRunning = false;
+            currentProject.startTime = Date.now();
+            currentProject.stopTime = null;
         };
         var currentProject = getCurrentProject();
         populateProject();
@@ -31,8 +35,8 @@ module.exports = function (RED) {
         }
 
         var setStatus = function () {
-            var color = currentProject.loop.isRunning ? 'green' : 'red'
-            var running = currentProject.loop.isRunning ? 'running' : 'not running'
+            var color = currentProject.isRunning ? 'green' : 'red'
+            var running = currentProject.isRunning ? 'running' : 'not running'
             var lop = 'loop ' + currentProject.loop.currentLoop;
 
             if (currentProject.loop.loopCount > 0) {
@@ -51,23 +55,25 @@ module.exports = function (RED) {
 
             if (msg.payload === 'start') {
                 reset();
-                currentProject.loop.isRunning = true;
+                currentProject.isRunning = true;
                 msg.payload = 'running';
                 start = { payload: "started" };
                 running = msg;
             }
             if (msg.payload === 'stop') {
-                currentProject.loop.isRunning = false;
+                currentProject.isRunning = false;
+                currentProject.stopTime = Date.now();
                 stop = { payload: "stopped" };
             }
 
             if (currentProject.loop.currentLoop === currentProject.loop.loopCount) {
-                currentProject.loop.isRunning = false;
+                currentProject.isRunning = false;
+                currentProject.stopTime = Date.now();
                 stop = { payload: "finished" };
 
             }
 
-            if (currentProject.loop.isRunning) {
+            if (currentProject.isRunning) {
                 currentProject.loop.currentLoop += 1;
 
                 running = msg;

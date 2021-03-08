@@ -108,24 +108,25 @@ module.exports = function (RED) {
         }
 
         var currentProject = getCurrentProject()
+        node.getPortData = function (port, availablePorts) {
+            // var getPortData = function (port, availablePorts) {
+            var prt = "not found";
 
-        var getPortData = function (port, availablePorts) {
-            var prt = "not found"
-
-            node.log('searching for port ' + port)
+            console.log('searching for port ' + port);
             availablePorts.forEach(function (item) {
-                if (item.port === port) {
-                    node.log('found an item')
+                console.log(item.port);
+                if (item.port == port) {
+                    console.log('found' + item)
                     prt = item
                 }
             })
-
+            console.log("port : " + prt);
             return prt
         }
 
         node.on('input', function (msg) {
-            var prt = getPortData(config.port, currentProject.ledGates);
-
+            var prt = node.getPortData(config.port, currentProject.ledGates);
+            msg.payload = prt;
             var output = [null, null, null]
             if (prt.val === "?") {
                 // Send a message to the unknown port.

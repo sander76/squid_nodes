@@ -18,9 +18,6 @@ describe('squid-data Node', function () {
                     done();
                 }
                 catch (err) { done(err); }
-
-
-
             })
         } catch (err) { done(err); }
 
@@ -47,10 +44,10 @@ describe('squid-data Node', function () {
 
             var currentProject = (n1.context().global).get("currentProject");
 
-            assert.equal(currentProject.loop.isRunning, false);
+            assert.equal(currentProject.isRunning, false);
             n1.receive({ payload: "start" });
             try {
-                assert.equal(currentProject.loop.isRunning, true);
+                assert.equal(currentProject.isRunning, true);
                 assert.equal(currentProject.loop.currentLoop, 1)
 
             } catch (err) { done(err); }
@@ -71,7 +68,7 @@ describe('squid-data Node', function () {
             // makes loopcount == 2
 
             try {
-                assert.equal(currentProject.loop.isRunning, true);
+                assert.equal(currentProject.isRunning, true);
                 assert.equal(currentProject.loop.currentLoop, 2)
 
             } catch (err) { done(err); }
@@ -90,7 +87,7 @@ describe('squid-data Node', function () {
             n1.receive({ payload: "start" });
 
             try {
-                assert.equal(currentProject.loop.isRunning, true);
+                assert.equal(currentProject.isRunning, true);
                 assert.equal(currentProject.loop.currentLoop, 1)
 
             } catch (err) { done(err); }
@@ -108,12 +105,12 @@ describe('squid-data Node', function () {
 
             n1.receive({ payload: "start" });
             currentProject.loop.currentLoop = 10
-            assert.equal(currentProject.loop.isRunning, true);
+            assert.equal(currentProject.isRunning, true);
 
             n1.receive('just a message')
             // this should have stopped the loop.
             try {
-                assert.equal(currentProject.loop.isRunning, false);
+                assert.equal(currentProject.isRunning, false);
                 assert.equal(currentProject.loop.currentLoop, 10)
 
             } catch (err) { done(err); }
@@ -149,7 +146,7 @@ describe('squid-data Node', function () {
                     }
 
                     if (loopCounter === 10) {
-                        if (!currentProject.loop.isRunning) {
+                        if (!currentProject.isRunning) {
                             done();
                         }
                     }
