@@ -1,4 +1,5 @@
 module.exports = function (RED) {
+    var prettyms = require('pretty-ms');
     function squidProject(config) {
         RED.nodes.createNode(this, config)
         var node = this;
@@ -12,22 +13,36 @@ module.exports = function (RED) {
             }
             return project;
         }
-
+        var started = 0
+        var finished = 0
 
         var populateProject = function () {
+            started = new Date();
+
             currentProject.name = config.name;
             currentProject.isRunning = false;
             currentProject.productId = config.productId
+            currentProject.productType = config.productType
+            currentProject.productMaterial = config.productMaterial
+            currentProject.productDimensions = config.productDimensions
             currentProject.remarks = config.remarks
             currentProject.loop = {}
             currentProject.loop.loopCount = parseInt(config.loopcount);
             currentProject.loop.currentLoop = 0;
-            currentProject.startTime = Date.now();
-            currentProject.stopTime = null;
+            currentProject.startTime = started.toString();
+            currentProject.stopTime = "unknown";
+            currentProject.duration = "unknown";
         };
         var currentProject = getCurrentProject();
         populateProject();
 
+
+        var stopTest = function () {
+            currentProject.isRunning = false;
+            finished = new Date();
+            currentProject.stopTime = finished.toString()
+            currentProject.duration = prettyms(finished - started)
+        }
 
         var reset = function () {
             // reset global data.
@@ -61,14 +76,16 @@ module.exports = function (RED) {
                 running = msg;
             }
             if (msg.payload === 'stop') {
-                currentProject.isRunning = false;
-                currentProject.stopTime = Date.now();
+                // currentProject.isRunning = false;
+                // currentProject.stopTime = Date.now();
+                stopTest()
                 stop = { payload: "stopped" };
             }
 
             if (currentProject.loop.currentLoop === currentProject.loop.loopCount) {
-                currentProject.isRunning = false;
-                currentProject.stopTime = Date.now();
+                // currentProject.isRunning = false;
+                // currentProject.stopTime = Date.now();
+                stopTest()
                 stop = { payload: "finished" };
 
             }

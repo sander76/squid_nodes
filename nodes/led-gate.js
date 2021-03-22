@@ -126,7 +126,7 @@ module.exports = function (RED) {
 
         node.on('input', function (msg) {
             var prt = node.getPortData(config.port, currentProject.ledGates);
-            msg.payload = prt;
+            msg.payload = JSON.stringify(prt);
             var output = [null, null, null]
             if (prt.val === "?") {
                 // Send a message to the unknown port.

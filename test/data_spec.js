@@ -118,7 +118,6 @@ describe('squid-data Node', function () {
             done();
         })
     })
-
     it('should loop exactly 10 times', function (done) {
         var flow = [
             { id: "n1", type: "squid-data", name: "squid data", loopcount: 10, wires: [["start_node"], ["stop_node"], ["n2"]] },
@@ -164,6 +163,24 @@ describe('squid-data Node', function () {
                 n1.receive({ payload: "just a message" });
             }
 
+        })
+    })
+    it('should have all properties set.', function (done) {
+        var flow = [{ id: "n1", type: "squid-data", name: "squid data" }];
+        helper.load(squidData, flow, function () {
+            var n1 = helper.getNode("n1");
+
+            var currentProject = (n1.context().global).get("currentProject");
+            try {
+                assert.equal(currentProject.name, "squid data");
+                assert.equal(currentProject.productId, undefined);
+                assert.equal(currentProject.productType, undefined);
+                assert.equal(currentProject.productDimensions, undefined);
+                assert.equal(currentProject.productDimensions, undefined);
+            }
+            catch (err) { done(err); }
+
+            done();
         })
     })
 
