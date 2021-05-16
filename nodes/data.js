@@ -32,6 +32,8 @@ module.exports = function (RED) {
             currentProject.startTime = started.toString();
             currentProject.stopTime = "unknown";
             currentProject.duration = "unknown";
+            currentProject.allowedFailures = parseInt(config.allowedFailures);
+            currentProject.currentFailures = 0;
         };
         var currentProject = getCurrentProject();
         populateProject();

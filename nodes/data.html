@@ -12,7 +12,8 @@
             productType: { value: undefined },
             productMaterial: { value: undefined },
             productDimensions: { value: undefined },
-            remarks: { value: undefined }
+            remarks: { value: undefined },
+            allowedFailures: { value: 1 }
 
         },
         inputs: 1,
@@ -36,6 +37,11 @@
         <label for="node-input-loopcount"><i class="fa fa-tag"></i> Loopcount</label>
         <input type="number" id="node-input-loopcount" placeholder="Loopcount">
         <p>To create an infinite loop set the loopcount to <b>-1</b></p>
+    </div>
+    <div class="form-row">
+        <label for="node-input-allowedFailures"><i class="fa fa-tag"></i>Allowed failures</label>
+        <input type="number" id="node-input-allowedFailures">
+        <p>How many failed tests are allowed before the test finally stops ?</p>
     </div>
     <div class="form-row">
         <label for="node-input-productId"><i class="fa fa-tag"></i>Product ID</label>
